@@ -1,5 +1,6 @@
 package exercise;
 
+
 class Address {
     // BEGIN
     @NotNull
