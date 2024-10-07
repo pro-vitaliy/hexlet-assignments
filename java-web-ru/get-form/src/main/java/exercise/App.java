@@ -23,12 +23,17 @@ public final class App {
 
         // BEGIN
         app.get("/users", ctx -> {
-           var term = ctx.queryParam("term");
-           var users = USERS.stream()
-                    .filter(user -> StringUtils.startsWithIgnoreCase(user.getFirstName(), term))
-                    .toList();
-           var page = new UsersPage(users, term);
-           ctx.render("users/index.jte", model("page", page));
+            var term = ctx.queryParam("term");
+            if (term == null) {
+                var page = new UsersPage(USERS, null);
+                ctx.render("users/index.jte", model("page", page));
+            } else {
+                var users = USERS.stream()
+                        .filter(user -> StringUtils.startsWithIgnoreCase(user.getFirstName(), term))
+                        .toList();
+                var page = new UsersPage(users, term);
+                ctx.render("users/index.jte", model("page", page));
+            }
         });
         // END
 
