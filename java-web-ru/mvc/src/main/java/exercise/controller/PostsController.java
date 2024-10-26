@@ -84,7 +84,7 @@ public class PostsController {
             var name = ctx.formParam("name");
             var body = ctx.formParam("body");
             var page = new EditPostPage(id, name, body, e.getErrors());
-            ctx.render("posts/edit.jte", model("page", page));
+            ctx.render("posts/edit.jte", model("page", page)).status(422);
         }
     }
     // END
