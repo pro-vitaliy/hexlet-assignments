@@ -18,6 +18,7 @@ public class ProductsRepository extends BaseRepository {
                 var stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, product.getTitle());
             stmt.setInt(2, product.getPrice());
+            stmt.executeUpdate();
             var generatedKeys = stmt.getGeneratedKeys();
             if (generatedKeys.next()) {
                 product.setId(generatedKeys.getLong(1));
@@ -45,7 +46,7 @@ public class ProductsRepository extends BaseRepository {
         }
     }
 
-    public static List<Product> getEntities() throws SQLException{
+    public static List<Product> getEntities() throws SQLException {
         var sql = "SELECT * FROM products";
         try (var conn = dataSource.getConnection();
                 var stmt = conn.prepareStatement(sql)) {
