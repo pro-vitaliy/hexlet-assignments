@@ -7,13 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import exercise.model.Post;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @SpringBootApplication
 @RestController
@@ -61,6 +55,11 @@ public class Application {
             post.setBody(data.getBody());
         }
         return data;
+    }
+
+    @DeleteMapping("/posts/{id}")
+    public void destroy(@PathVariable String id) {
+        posts.removeIf(p -> p.getId().equals(id));
     }
     // END
 }
