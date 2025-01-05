@@ -1,0 +1,13 @@
+# BEGIN
+---
+
+spring:
+  datasource:
+    password: 123
+    username: sa
+    url: jdbc:h2:mem:test
+
+  output:
+    ansi:
+      enabled: always
+# END
